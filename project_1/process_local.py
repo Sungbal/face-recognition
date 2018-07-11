@@ -14,7 +14,7 @@ All the above steps should be in one function called process_image()
 """
 
 # TODO: Import OpenCV
-
+import cv2
 
 # TODO: Edit this function
 def process_image():
@@ -28,6 +28,16 @@ def hello_world():
 # TODO: Call process_image function.
 def main():
     hello_world()
+    srcimage = cv2.imread("geisel.jpg", cv2.IMREAD_GRAYSCALE)
+    height, width = srcimage.shape
+    cv2.resize(srcimage, (width, height))
+    height, width = srcimage.shape
+    cv2.rectangle(srcimage, (width/2-50, height/2-50), (width/2+50, height/2+50), (255,255,255), 3)
+
+    #cv2.imwrite("image.jpg", srcimage)
+    cv2.imshow("Geisel", srcimage)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
     return
 
 
