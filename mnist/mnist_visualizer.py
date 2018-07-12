@@ -27,7 +27,7 @@ def _main(args):
 
         # TODO: Use imshow to display the images
         
-        cv2.imshow(y_train[i], x_train[i])
+        cv2.imshow(label, x_train[i])
 
         # This is required for the image to show up and 
         # it waits for a key to be pressed to continue
