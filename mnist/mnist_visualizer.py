@@ -20,13 +20,14 @@ def _main(args):
 
         # TODO: Access the i'th image in x_train
         # Hint: x_train[0] is the 0'th element
-        img = #_________
+        img = x_train[i]
 
 
         label = str(y_train[i])
 
         # TODO: Use imshow to display the images
-        #__________
+        
+        cv2.imshow(y_train[i], x_train[i])
 
         # This is required for the image to show up and 
         # it waits for a key to be pressed to continue
