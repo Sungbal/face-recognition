@@ -32,11 +32,11 @@ def _main(args):
     print("Begin fitting...")
 
     # TODO: Create an SVM with a cache_size=2048
-    svm = #________
+    svm = SVC()
 
     # TODO: Fit the data
     # Hint: svm.fit
-    #___________
+    svm.fit(x_train, y_train)
     print("Classifier fitted.")
 
     # Evaluate on testing data.
@@ -44,7 +44,7 @@ def _main(args):
 
     # TODO: Evaluate on testing data
     # Hint: svm.score
-    acc = #___________
+    acc = svm.score(x_test, y_test)
     print("Accuracy: {}".format(acc))
 
 
