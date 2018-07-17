@@ -23,9 +23,9 @@ def splitData(pathToDirectory:str, pTrain:int, pVal:int, pTest:int)->None:
     ###   1) data/training
     ###   2) data/validation 
     ###   3) data/testing
-    TRAIN_PATH = os.path.abspath(pathToDirectory+"/../images/17/crop/training/")
-    VAL_PATH = os.path.abspath(pathToDirectory+"/../images/17/crop/validation/")
-    TEST_PATH = os.path.abspath(pathToDirectory+"/../images/17/crop/testing/")
+    TRAIN_PATH = os.path.abspath(pathToDirectory+"/../data/training/")
+    VAL_PATH = os.path.abspath(pathToDirectory+"/../data/validation/")
+    TEST_PATH = os.path.abspath(pathToDirectory+"/../data/testing/")
     allLoc = [TRAIN_PATH, VAL_PATH, TEST_PATH]
 
     # Check for possible overwrites
