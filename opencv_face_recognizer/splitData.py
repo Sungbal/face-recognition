@@ -21,7 +21,7 @@ import getch
 def splitData(pathToDirectory:str, pTrain:int, pVal:int, pTest:int)->None:
     ### Generate list of folders and create three paths
     ###   1) data/training
-    ###   2) data/validation
+    ###   2) data/validation 
     ###   3) data/testing
     TRAIN_PATH = os.path.abspath(pathToDirectory+"/../images/17/crop/training/")
     VAL_PATH = os.path.abspath(pathToDirectory+"/../images/17/crop/validation/")
