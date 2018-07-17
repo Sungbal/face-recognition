@@ -19,9 +19,9 @@ import cv2 as cv
 
 # initialize the camera and grab a reference to the raw camera capture
 camera = PiCamera()
-camera.resolution = (640, 480)
+camera.resolution = (320, 240)
 camera.framerate = 32
-rawCapture = PiRGBArray(camera, size=(640, 480))
+rawCapture = PiRGBArray(camera, size=(320, 240))
 
 haarcascade_frontalface = "/usr/local/share/OpenCV/haarcascades/haarcascade_frontalface_alt2.xml"
 haarcascade_eye = "/usr/local/share/OpenCV/haarcascades/haarcascade_eye.xml"
@@ -37,32 +37,28 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     # grab the raw NumPy array representing the image, then initialize the timestamp
     # and occupied/unoccupied text
     image = frame.array
-    cv.flip(image, 0)
+    image = cv.flip(image, 1)
 
     height, width, channel = image.shape
 
-    factor = 2
+    #factor = 4
 
     grayimage = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
-    grayimage = cv.resize(grayimage, (round(height/factor), round(width/factor)))
-
-
-    
+    #grayimage = cv.resize(grayimage, (int(round(height/factor)), int(round(width/factor))))
 
     faces = face_cascade.detectMultiScale(grayimage, 1.2, 5)
-
     for (x,y,w,h) in faces:
-        cv.rectangle(image, (x,y), (x+w, y+h), (255,0,0), 2)
-        roi_gray = grayimage[y:y+h, x:x+w]
-        roi_color = image[y:y+h, x:x+w]
+        cv.rectangle(grayimage, (x,y), ((x+w), (y+h)), (255,0,0), 2)
+        #roi_gray = grayimage[y:y+h, x:x+w]
+        #roi_color = image[y:y+h, x:x+w]
 
-        eyes = eye_cascade.detectMultiScale(roi_gray, 1.2, 5)
-        for (ex,ey,ew,eh) in eyes:
-            cv.rectangle(roi_color, (ex,ey), (ex+ew, ey+eh), (0,255,0), 2)
+        #eyes = eye_cascade.detectMultiScale(roi_gray, 1.1, 3)
+        #for (ex,ey,ew,eh) in eyes:
+        #    cv.rectangle(image, (ex*factor,ey*factor), ((ex+ew)*factor, (ey+eh)*factor), (0,255,0), 2)
 
 
     # show the frame
-    cv.imshow("Frame", image)
+    cv.imshow("Frame", grayimage)
     key = cv.waitKey(1) & 0xFF
 
     # clear the stream in preparation for the next frame
