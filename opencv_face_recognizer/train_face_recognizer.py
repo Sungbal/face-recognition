@@ -64,7 +64,7 @@ def predict(recognizer,test_img):
         return test_img
 
     # TODO: Resize image to (100,100)
-    face = # _______
+    face =  cv2.resize(face, 100, 100)
 
     # TODO: Predict the image using our face recognizer 
     # Hint: use recognizer.predict and face
