@@ -12,6 +12,8 @@ def _main(args):
     import numpy as np
     from sklearn.neighbors import KNeighborsClassifier
 
+    import matplotlib.pyplot as plt
+
     # Load dataset
     from keras.datasets import mnist
     (x_train, y_train), (x_test, y_test) = mnist.load_data()
@@ -22,14 +24,15 @@ def _main(args):
     print("Reshaped x data into {}".format(x_train.shape))
 
     # TODO: Create KNeighorsClassifier with neighbors 3, and n_jobs=-1
-    knn = # ________
+    knn = KNeighborsClassifier(n_neighbors=3, n_jobs=-1)
+    
 
     # Train with data.
     print("Begin fitting...")
 
     # TODO: Fit the data
     # Hint: knn.fit
-    # __________
+    knn.fit(x_train, y_train)
     print("Classifier fitted.")
 
     # Evaluate on testing data.
@@ -37,8 +40,15 @@ def _main(args):
 
     # TODO: Evaluate on testing data
     # Hint: knn.score
-    acc = #_________
+    acc = knn.score(x_test, y_test)
     print("Accuracy: {}".format(acc))
+
+
+    plt.figure
+    plt.subplot(1,2,1)
+    plt.scatter(x_train[:,0], x_train[:,1], c=y_train)
+    plt.subplot(1,2,2)
+    plt.scatter(x_test[:,0], x_test[:,1], c=y_test)
 
   
 if(__name__ == '__main__'):
