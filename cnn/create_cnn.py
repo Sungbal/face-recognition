@@ -42,20 +42,18 @@ Modify this code to write a LeNet with the following requirements:
     output 10-dimensional vector (This is specified through units.)
 """
 # TODO: Import other layers as necessary. (Conv2D, MaxPooling2D)
-from keras.layers import Input, Dense
+from keras.layers import Input, Dense, Conv2D, MaxPooling2D
 from keras.models import Model
 
-model = Model.Sequential()
-
-model.add(Convolution2D(6, 5, 5, activation = 'sigmoid', strides=1, input_shape=in_shape, init='he_normal'))
-model.add(MaxPooling2D(pool_size=(2, 2), strides=2))
-model.add(Convolution2D(16, 5, 5, activation = 'sigmoid', strides=1, init='he_normal'))
-model.add(MaxPooling2D(pool_size=(2, 2)), strides=2)
-model.add(Convolution2D(120, 5, 5, activation = 'sigmoid', strides=1, init='he_normal'))
-
 # TODO: Currently, sets input dimension to be 784x1. Change to 32x32x1
-inputs = Input(shape=(784,))
-input.reshape()
+inputs = Input(shape=(32,32,1))
+#input.reshape(32, 32, 1)
+
+C1 = Conv2D(6, (5,5), activation = 'sigmoid')(inputs)
+S2 = MaxPooling2D(pool_size=(2, 2))(C1)
+C3 = Conv2D(16, (5,5), activation = 'sigmoid')(S2)
+S4 = MaxPooling2D(pool_size=(2, 2))(C3)
+C5 = Conv2D(120, (5,5), activation='sigmoid')(S4)
 
 # A layer instance is callable on a tensor, and returns a tensor
 x = Dense(64, activation='relu')(inputs)
