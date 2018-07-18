@@ -16,6 +16,9 @@ import cv2
 import os
 import numpy as np
 
+from picamera.array import PiRGBArray
+from picamera import PiCamera
+
 def detect_face(img):
     """ Crops the face from an image."""
 
@@ -31,7 +34,7 @@ def detect_face(img):
 
     #let's detect multiscale (some images may be closer to camera than others) images
     #result is a list of faces
-    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=5);
+    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=5)
     
     #if no faces are detected then return original img
     if (len(faces) == 0):
@@ -64,11 +67,11 @@ def predict(recognizer,test_img):
         return test_img
 
     # TODO: Resize image to (100,100)
-    face =  cv2.resize(face, 100, 100)
+    face =  cv2.resize(face, (100, 100))
 
     # TODO: Predict the image using our face recognizer 
     # Hint: use recognizer.predict and face
-    label, confidence = # ________
+    label, confidence = recognizer.predict(face)
     
 
     #get name of respective label returned by face recognizer
@@ -120,11 +123,18 @@ def train(data_dir):
 
 def predict_live(recognizer):
 
+    camera = PiCamera()
+    camera.resolution = (320, 240)
+    camera.framerate = 32
+    rawCapture = PiRGBArray(camera, size=(320, 240))
 
     print("Starting live feed.")
     # TODO: Get video feed from camera and store it in frame and in a loop
-    # for
-        frame = #________
+    for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+        image = frame.array
+        image = cv.flip(image, 1)
+        height, width, channel = image.shape
+
         predicted_image = predict(recognizer, frame)
         cv2.imshow('Face', predicted_image)
         # Wait one second and exit if 'q' is pressed.
