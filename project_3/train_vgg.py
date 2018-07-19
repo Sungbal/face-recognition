@@ -33,7 +33,7 @@ def load_model():
     # TODO: use VGG16 to load lower layers of vgg16 network and declare it as base_model
     # TODO: use 'imagenet' for weights, include_top=False, (IMG_H, IMG_W, NUM_CHANNELS) for input_shape
 
-    base_model = VGG_16('vgg16_weights.h5')
+    base_model = VGG16('vgg16_weights.h5')
 
     print('Model weights loaded.')
     base_out = base_model.output
